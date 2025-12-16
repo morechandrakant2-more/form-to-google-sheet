@@ -1,20 +1,134 @@
 <!DOCTYPE html>
-<html>
+<html lang="mr">
 <head>
-  <title>Online Form</title>
+<meta charset="UTF-8">
+<title>परावर्तन घोषणापत्रक</title>
+
+<style>
+  body {
+    font-family: "Noto Serif Devanagari", Mangal, serif;
+    margin: 30px;
+  }
+  h2, h3 {
+    text-align: center;
+  }
+  .line {
+    border-bottom: 1px solid #000;
+    display: inline-block;
+    width: 100%;
+    height: 22px;
+  }
+  .field {
+    margin-bottom: 10px;
+  }
+  input, textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 16px;
+    outline: none;
+  }
+  textarea {
+    resize: none;
+  }
+  .row {
+    display: flex;
+    gap: 15px;
+  }
+  .col {
+    flex: 1;
+  }
+  button {
+    margin-top: 20px;
+    padding: 10px 30px;
+    font-size: 16px;
+  }
+</style>
 </head>
+
 <body>
 
-<h2>Submit Data</h2>
+<h3>॥ श्री ॥</h3>
+<h2>परावर्तन घोषणापत्रक</h2>
+<h3>प्रपत्र 'अ'</h3>
 
 <form id="myForm">
-  <input type="text" name="name" placeholder="Name" required><br><br>
-  <input type="email" name="email" placeholder="Email" required><br><br>
-  <input type="tel" name="phone" placeholder="Mobile Number" required pattern="[0-9]{10}" maxlength="10" title="Please enter a 10-digit mobile number"><br><br>
-  <button type="submit">Submit</button>
-</form>
 
+<div class="field">
+  मी (वर्तमान पूर्ण नाव):
+  <input type="text" name="fullName" required>
+</div>
+
+<div class="row">
+  <div class="col">जन्म दिनांक: <input type="date" name="dob"></div>
+  <div class="col">जन्मस्थान: <input type="text" name="birthPlace"></div>
+  <div class="col">मोबाईल क्र.: 
+    <input type="tel" name="phone" required maxlength="10" pattern="[0-9]{10}">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">वडिलांचे / पतीचे पूर्ण नाव: <input type="text" name="fatherName"></div>
+  <div class="col">वय: <input type="number" name="age"></div>
+</div>
+
+<div class="row">
+  <div class="col">शिक्षण: <input type="text" name="education"></div>
+  <div class="col">राष्ट्रीयत्व: <input type="text" name="nationality"></div>
+  <div class="col">व्यवसाय: <input type="text" name="occupation"></div>
+</div>
+
+<div class="field">
+  सध्याचा धर्म:
+  <input type="text" name="currentReligion">
+</div>
+
+<div class="field">
+  परिवारातील सदस्य संख्या:
+  <input type="number" name="familyMembers">
+</div>
+
+<div class="field">
+  सध्याचा पत्ता:
+  <textarea name="currentAddress" rows="3"></textarea>
+</div>
+
+<div class="field">
+  कायमचा पत्ता:
+  <textarea name="permanentAddress" rows="3"></textarea>
+</div>
+
+<hr>
+
+<div class="field">
+  मी (पूर्ण नाव) <input type="text" name="declarationName">  
+  सध्याचा धर्म <input type="text" name="declarationReligion">
+</div>
+
+<div class="field">
+  नवीन धर्म स्वीकारत आहे: <input type="text" name="newReligion">
+</div>
+
+<div class="row">
+  <div class="col">जिल्हा: <input type="text" name="district"></div>
+  <div class="col">तालुका: <input type="text" name="taluka"></div>
+  <div class="col">शाखा: <input type="text" name="branch"></div>
+</div>
+
+<div class="row">
+  <div class="col">स्थळ: <input type="text" name="place"></div>
+  <div class="col">दिनांक: <input type="date" name="date"></div>
+</div>
+
+<div class="field">
+  स्वाक्षरी:
+  <input type="text" name="signature">
+</div>
+
+<button type="submit">Submit</button>
 <p id="status"></p>
+
+</form>
 
 <script>
 const form = document.getElementById("myForm");
@@ -22,23 +136,19 @@ const form = document.getElementById("myForm");
 form.addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const data = {
-    name: form.name.value,
-    email: form.email.value,
-    phone: form.phone.value
-  };
+  const data = Object.fromEntries(new FormData(form).entries());
 
-  fetch("https://script.google.com/macros/s/AKfycbwlxt6NCuR6Lbjevfm0QUQ2kSVYx6mZMATwhKVJLsZ8GFNzZiWi30P3UB2VcduJFTRK/exec", {
+  fetch("YOUR_WEB_APP_URL", {
     method: "POST",
     body: JSON.stringify(data)
   })
   .then(res => res.json())
   .then(() => {
-    document.getElementById("status").innerText = "Data submitted successfully!";
+    document.getElementById("status").innerText = "फॉर्म यशस्वीरीत्या सबमिट झाला आहे";
     form.reset();
   })
   .catch(() => {
-    document.getElementById("status").innerText = "Error submitting data";
+    document.getElementById("status").innerText = "त्रुटी आली आहे";
   });
 });
 </script>
