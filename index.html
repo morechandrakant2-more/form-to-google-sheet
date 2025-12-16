@@ -1,109 +1,159 @@
 <!DOCTYPE html>
 <html lang="mr">
 <head>
-<meta charset="UTF-8">
-<title>परावर्तन घोषणापत्रक</title>
-
+<meta charset="UTF-8" />
+<title>परावर्तन घोषणापत्रक - प्रपत्र 'अ'</title>
 <style>
   body {
     font-family: "Noto Serif Devanagari", Mangal, serif;
-    margin: 30px;
+    margin: 30px 50px;
+    font-size: 16px;
   }
   h2, h3 {
     text-align: center;
+    margin-bottom: 0;
   }
-  .line {
-    border-bottom: 1px solid #000;
+  label {
     display: inline-block;
-    width: 100%;
-    height: 22px;
+    margin-right: 10px;
+    white-space: nowrap;
   }
-  .field {
-    margin-bottom: 10px;
-  }
-  input, textarea {
-    width: 100%;
+  input[type="text"], input[type="date"], input[type="tel"], input[type="number"] {
     border: none;
     border-bottom: 1px solid black;
+    width: 250px;
     font-size: 16px;
+    padding: 2px 5px;
     outline: none;
+    transition: border-color 0.3s ease;
   }
-  textarea {
-    resize: none;
+  input[type="date"] {
+    width: 140px;
+  }
+  input.invalid {
+    border-bottom: 2px solid red !important;
+  }
+  .line {
+    border-bottom: 1px solid black;
+    height: 20px;
+    width: 100%;
+    margin: 5px 0 15px 0;
   }
   .row {
     display: flex;
+    align-items: center;
+    margin-bottom: 12px;
     gap: 15px;
+    flex-wrap: wrap;
   }
-  .col {
-    flex: 1;
+  .full-width {
+    width: 100%;
+  }
+  .half-width {
+    width: 48%;
   }
   button {
-    margin-top: 20px;
-    padding: 10px 30px;
+    padding: 8px 18px;
     font-size: 16px;
+  }
+  #status {
+    color: red;
+    margin-top: 10px;
+    font-weight: bold;
   }
 </style>
 </head>
-
 <body>
 
-<h3>॥ श्री ॥</h3>
 <h2>परावर्तन घोषणापत्रक</h2>
 <h3>प्रपत्र 'अ'</h3>
 
-<form id="myForm">
+<form id="myForm" novalidate>
 
-<div class="field">
-  वर्तमान पूर्ण नाव:
-  <input type="textbox" name="fullName" required>
+<div class="field full-width">
+  <label>वर्तमान पूर्ण नाव:</label>
+  <input type="text" name="fullName" required />
+  <div class="line"></div>
 </div>
 
 <div class="row">
-  <div class="col">जन्म दिनांक: <input type="date" name="dob"></div>
-  <div class="col">जन्मस्थान: <input type="text" name="birthPlace"></div>
-  <div class="col">मोबाईल क्र.: 
-    <input type="tel" name="phone" required maxlength="10" pattern="[0-9]{10}">
+  <div class="half-width">
+    <label>जन्म दिनांक:</label>
+    <input type="date" name="dob" required />
+  </div>
+  <div class="half-width">
+    <label>जन्मस्थान:</label>
+    <input type="text" name="birthPlace" required />
+  </div>
+  <div class="half-width">
+    <label>मोबाईल क्र.:</label>
+    <input type="tel" name="phone" maxlength="10" pattern="[0-9]{10}" required />
   </div>
 </div>
+<div class="line"></div>
 
 <div class="row">
-  <div class="col">वडिलांचे / पतीचे पूर्ण नाव: <input type="text" name="fatherName"></div>
-  <div class="col">वय: <input type="number" name="age"></div>
+  <div class="half-width">
+    <label>वडिलांचे / पतीचे पूर्ण नाव:</label>
+    <input type="text" name="fatherName" required />
+  </div>
+  <div class="half-width">
+    <label>वय:</label>
+    <input type="number" name="age" min="0" required />
+  </div>
 </div>
+<div class="line"></div>
 
 <div class="row">
-  <div class="col">शिक्षण: <input type="text" name="education"></div>
-  <div class="col">राष्ट्रीयत्व: <input type="text" name="nationality"></div>
-  <div class="col">व्यवसाय: <input type="text" name="occupation"></div>
+  <div class="half-width">
+    <label>शिक्षण:</label>
+    <input type="text" name="education" required />
+  </div>
+  <div class="half-width">
+    <label>राष्ट्रीयत्व:</label>
+    <input type="text" name="nationality" required />
+  </div>
+  <div class="half-width">
+    <label>व्यवसाय:</label>
+    <input type="text" name="occupation" required />
+  </div>
+</div>
+<div class="line"></div>
+
+<div class="field full-width">
+  <label>सध्याचा धर्म:</label>
+  <input type="text" name="currentReligion" class="full-width" required />
+  <div class="line"></div>
 </div>
 
-<div class="field">
-  सध्याचा धर्म:
-  <input type="text" name="currentReligion">
+<div class="field full-width">
+  <label>परिवारातील सदस्य संख्या:</label>
+  <input type="number" name="familyMembers" min="0" required />
+  <div class="line"></div>
 </div>
 
-<div class="field">
-  परिवारातील सदस्य संख्या:
-  <input type="number" name="familyMembers">
+<div class="field full-width">
+  <label>सध्याचा पत्ता:</label>
+  <input type="text" name="currentAddress" class="full-width" required />
+  <div class="line"></div>
 </div>
 
-<div class="field">
-  सध्याचा पत्ता:
-  <textarea name="currentAddress" rows="3"></textarea>
+<div class="field full-width">
+  <label>कायमचा पत्ता:</label>
+  <input type="text" name="permanentAddress" class="full-width" required />
+  <div class="line"></div>
 </div>
 
-<div class="field">
-  कायमचा पत्ता:
-  <textarea name="permanentAddress" rows="3"></textarea>
+<div class="field full-width">
+  <label>संपर्क सूत्र:</label>
+  <input type="text" name="contactSource" class="full-width" required />
+  <div class="line"></div>
 </div>
 
-<hr>
-
-<div class="field">
-  संपर्क सूत्र <input type="text" name="declarationName">  
-  मोबाईल क्र.: 
-    <input type="tel" name="phone" required maxlength="10" pattern="[0-9]{10}">
+<div class="field full-width">
+  <label>मोबाईल क्र.:</label>
+  <input type="tel" name="contactMobile" maxlength="10" pattern="[0-9]{10}" required />
+  <div class="line"></div>
 </div>
 
 <button type="submit">Submit</button>
@@ -113,24 +163,79 @@
 
 <script>
 const form = document.getElementById("myForm");
+const status = document.getElementById("status");
 
 form.addEventListener("submit", function(e) {
   e.preventDefault();
 
+  // Clear previous error styles and message
+  status.textContent = "";
+  status.style.color = "red";
+  const inputs = form.querySelectorAll("input");
+  inputs.forEach(input => input.classList.remove("invalid"));
+
+  // Check required fields for empty values
+  let valid = true;
+  inputs.forEach(input => {
+    if (!input.value.trim()) {
+      input.classList.add("invalid");
+      valid = false;
+    }
+  });
+
+  // Birthdate validation: must be less than today
+  const dobInput = form.elements["dob"];
+  if (dobInput.value) {
+    const selectedDate = new Date(dobInput.value);
+    const today = new Date();
+    today.setHours(0,0,0,0); // reset time portion for accurate comparison
+    if (selectedDate >= today) {
+      dobInput.classList.add("invalid");
+      valid = false;
+      status.textContent = "जन्म दिनांक आजच्या तारखेपेक्षा लहान असला पाहिजे.";
+    }
+  }
+
+  // Mobile number validations (exactly 10 digits)
+  const phone = form.elements["phone"];
+  const contactMobile = form.elements["contactMobile"];
+  const phoneRegex = /^\d{10}$/;
+
+  if (phone.value && !phoneRegex.test(phone.value)) {
+    phone.classList.add("invalid");
+    valid = false;
+    status.textContent = "मुख्य मोबाईल नंबर १० अंकी असावा.";
+  }
+
+  if (contactMobile.value && !phoneRegex.test(contactMobile.value)) {
+    contactMobile.classList.add("invalid");
+    valid = false;
+    status.textContent = "संपर्क मोबाईल नंबर १० अंकी असावा.";
+  }
+
+  if (!valid) {
+    if (!status.textContent) {
+      status.textContent = "कृपया सर्व आवश्यक क्षेत्रे भरा.";
+    }
+    return;
+  }
+
+  // Prepare data
   const data = Object.fromEntries(new FormData(form).entries());
 
   fetch("https://script.google.com/macros/s/AKfycbwlxt6NCuR6Lbjevfm0QUQ2kSVYx6mZMATwhKVJLsZ8GFNzZiWi30P3UB2VcduJFTRK/exec", {
     method: "POST",
     body: JSON.stringify(data)
-  })
-  .then(res => res.json())
-  .then(() => {
-    document.getElementById("status").innerText = "फॉर्म यशस्वीरीत्या सबमिट झाला आहे";
-    form.reset();
-  })
-  .catch(() => {
-    document.getElementById("status").innerText = "त्रुटी आली आहे";
-  });
+  }).then(res => res.json())
+    .then(() => {
+      status.style.color = "green";
+      status.textContent = "फॉर्म यशस्वीरीत्या सबमिट झाला आहे";
+      form.reset();
+    })
+    .catch(() => {
+      status.style.color = "red";
+      status.textContent = "सबमिट करताना त्रुटी आली.";
+    });
 });
 </script>
 
