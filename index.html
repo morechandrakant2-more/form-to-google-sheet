@@ -107,7 +107,7 @@
   </div>
   <div class="half-width">
     <label>राष्ट्रीयत्व:</label>
-    <input type="text" name="nationality" value="Indian" required />
+    <input type="text" name="nationality" value="Indian" readonly />
   </div>
   <div class="half-width">
     <label>व्यवसाय:</label>
@@ -131,6 +131,12 @@
 <div class="field full-width">
   <label>सध्याचा पत्ता:</label>
   <input type="text" name="currentAddress" class="full-width" required />
+  <div class="line"></div>
+</div>
+
+<div class="field full-width">
+  <label>कायमचा पत्ता:</label>
+  <input type="text" name="permanentAddress" class="full-width" required />
   <div class="line"></div>
 </div>
 
@@ -178,7 +184,7 @@ form.addEventListener("submit", function(e) {
   if (dobInput.value) {
     const selectedDate = new Date(dobInput.value);
     const today = new Date();
-    today.setHours(0,0,0,0); // reset time portion for accurate comparison
+    today.setHours(0,0,0,0); // reset time portion
     if (selectedDate >= today) {
       dobInput.classList.add("invalid");
       valid = false;
@@ -211,11 +217,20 @@ form.addEventListener("submit", function(e) {
   }
 
   // Prepare data
-  const data = Object.fromEntries(new FormData(form).entries());
+  const formData = Object.fromEntries(new FormData(form).entries());
+
+  // Reformat birth date to dd-mm-yyyy
+  if (formData.dob) {
+    const date = new Date(formData.dob);
+    const day = ("0" + date.getDate()).slice(-2);
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const year = date.getFullYear();
+    formData.dob = `${day}-${month}-${year}`;
+  }
 
   fetch("https://script.google.com/macros/s/AKfycbwlxt6NCuR6Lbjevfm0QUQ2kSVYx6mZMATwhKVJLsZ8GFNzZiWi30P3UB2VcduJFTRK/exec", {
     method: "POST",
-    body: JSON.stringify(data)
+    body: JSON.stringify(formData)
   }).then(res => res.json())
     .then(() => {
       status.style.color = "green";
